@@ -1,13 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tasks: [{key: 1, name: 'create an app', points: 20, created: new Date(), completed: false}]
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text>Get Stuff Done ✔︎</Text>
+        <FlatList
+          data={this.state.tasks.filter(task => !task.completed)}
+          renderItem={({ item }) => <Text>Task: {item.name} Points: {item.points}</Text>}
+        />
       </View>
     );
   }
